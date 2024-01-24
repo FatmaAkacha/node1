@@ -24,6 +24,11 @@ const classes = [
 app.get('/classes', (req, res) => {
     res.json(classes);
 });
+app.get('/etudiants/:id', (req, res) => {
+    const etudiantId = parseInt(req.params.id);
+    const selectedEtudiant = etudiants.find(etudiant => etudiant.id === etudiantId);
+        res.json(selectedEtudiant);
+});
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
