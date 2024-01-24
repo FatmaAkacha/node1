@@ -8,13 +8,13 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 });
-const users = [
-    { id: 1, name: 'John Doe' },
-    { id: 2, name: 'Jane Smith' },
-    { id: 3, name: 'Bob Johnson' }
+const etudiants = [
+    { id: 1, nom: 'John Doe' },
+    { id: 2, nom: 'Jane Smith' },
+    { id: 3, nom: 'Bob Johnson' }
 ];
-app.get('/users', (req, res) => {
-    res.json(users);
+app.get('/etudiants', (req, res) => {
+    res.json(etudiants);
 });
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
