@@ -16,6 +16,14 @@ const etudiants = [
 app.get('/etudiants', (req, res) => {
     res.json(etudiants);
 });
+const classes = [
+    { id:'ginf21', labelle: "Génie Informatique 21 cours de jour" },
+    { id:'ginf22', labelle: "Génie Informatique 22 cours de soir" },
+    { id:'ginf32', labelle: "Génie Informatique 32 cours de soir" }
+];
+app.get('/classes', (req, res) => {
+    res.json(classes);
+});
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
