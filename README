@@ -1,3 +1,4 @@
 npm init
 npm install express
 node server.js : A chaque modification on relance le serveur
+npm install mysql
