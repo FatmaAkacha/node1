@@ -3,6 +3,7 @@ const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
 const app = express();
 const bodyParser = require('body-parser');
+const req = require('express/lib/request');
 
 app.use(cors()); // Utilisation du middleware cors pour autoriser les requêtes CORS
 
@@ -83,6 +84,34 @@ app.post('/etudiants', (req, res) => {
     }
   });
 });
+// delete 
+app.delete('/etudiants', (req, res) => {
+  const id = req.body.id;
+  const sql = 'delete from etudiants where id = ?';
+  db.run(sql, [id], function (err) {
+    if (err) {
+      console.error('Error updating student', err);
+      res.status(500).send('Error updating student');
+    } else {
+      res.send(`Student with ID ${id} delete successfully`);
+    }
+  });
+});
+
+// recherche
+app.get('/recherche/:nom/:ville', (req, res) => {
+    const nom = req.params.nom + '%';
+    const ville = req.params.ville + '%';
+    const sql = 'SELECT * FROM etudiants WHERE lastname LIKE ? AND firstname LIKE ?';
+    db.all(sql, [nom, ville], (error, rows) => {
+      if (error) {
+        console.error('Error fetching data', error);
+        res.status(500).send('Error fetching data');
+      } else {
+        res.json(rows);
+      }
+    });
+  });
 
 //Démarrage du serveur
 app.listen(port, () => {
