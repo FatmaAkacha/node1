@@ -86,17 +86,17 @@ app.post('/etudiants', (req, res) => {
 });
 // delete 
 app.delete('/etudiants', (req, res) => {
-  const id = req.body.id;
-  const sql = 'delete from etudiants where id = ?';
-  db.run(sql, [id], function (err) {
-    if (err) {
-      console.error('Error updating student', err);
-      res.status(500).send('Error updating student');
-    } else {
-      res.send(`Student with ID ${id} delete successfully`);
-    }
+    const id = req.body.id;
+    const sql = 'delete from etudiants where id = ?';
+    db.run(sql, [id], function (err) {
+      if (err) {
+        console.error('Error updating student', err);
+        res.status(500).send('Error updating student');
+      } else {
+        res.send(`Student with ID ${id} delete successfully`);
+      }
+    });
   });
-});
 
 // recherche
 app.get('/recherche/:nom/:ville', (req, res) => {
