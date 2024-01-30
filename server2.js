@@ -5,7 +5,10 @@ const app = express();
 const bodyParser = require('body-parser');
 const req = require('express/lib/request');
 
-app.use(cors()); // Utilisation du middleware cors pour autoriser les requêtes CORS
+app.use(cors({
+  origin: '*'
+}));
+ // Utilisation du middleware cors pour autoriser les requêtes CORS
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -98,20 +101,20 @@ app.delete('/etudiants', (req, res) => {
     });
   });
 
-// recherche
-app.get('/recherche/:nom/:ville', (req, res) => {
-    const nom = req.params.nom + '%';
-    const ville = req.params.ville + '%';
-    const sql = 'SELECT * FROM etudiants WHERE lastname LIKE ? AND firstname LIKE ?';
-    db.all(sql, [nom, ville], (error, rows) => {
-      if (error) {
-        console.error('Error fetching data', error);
-        res.status(500).send('Error fetching data');
-      } else {
-        res.json(rows);
-      }
-    });
+// Recherche d'étudiants par nom et ville
+app.get('/rechercher', (req, res) => {
+  const nom = req.query.lastname + "%";
+  const ville = req.query.ville + "%";
+  const sql = 'SELECT * FROM etudiants WHERE lastname like ? AND ville like ?';
+  db.all(sql, [nom, ville], function (err, rows) {
+    if (err) {
+      console.error('Error ', err);
+      res.status(500).send('Error '); 
+    } else {
+      res.json(rows); 
+    }
   });
+});
 
 //Démarrage du serveur
 app.listen(port, () => {
