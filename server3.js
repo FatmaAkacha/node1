@@ -1,37 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const { Sequelize, DataTypes } = require('sequelize');
-
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: './test.db'
-});
-
-const Etudiant = sequelize.define('Etudiant', {
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
-  },
-  lastname: { 
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  firstname: { 
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  ville: { 
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-},
-{ 
-  tableName: "etudiants", 
-  timestamps: false 
-});
-
+const Etudiants = require('./Etudiants')
 
 // Synchronisation avec la base de données
 sequelize.sync().then(() => {
