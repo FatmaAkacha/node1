@@ -3,3 +3,4 @@ npm install express
 node server.js : A chaque modification on relance le serveur
 npm install sqlite3
 npm install cors
+npm install sequelize mysql2
